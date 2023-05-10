@@ -1,0 +1,62 @@
+﻿@using hospitals.Utilities
+@model PagedResult<Hospital.ViewModels.ApplicationUserViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <img src="~/hospital-building-001-global.webp" style="max-width:100% ; height:auto;" />
+
+</div>
+
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            @foreach (var item in Model.Data)
+            {
+
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="~/Images/@item.PictureUri" data-holder-rendered="true">
+                        <div class="card-body">
+                            <h3>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h3>
+                            <h5>
+                                @Html.DisplayFor(modelItem => item.Email)
+
+                            </h5>
+                            <h6>
+                                @Html.DisplayFor(modelItem => item.Gender)
+
+                            </h6>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<cs-pager cs-paging-pagesize=(int)Model.PageSize
+          cs-paging-pagenumber=(int)Model.PageNumber
+          cs-paging-totalitems=(int)Model.TotalItems
+          cs-pagenumber-param="pageNumber"
+          asp-controller="Home"
+          asp-action="Index"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link">
+</cs-pager>
